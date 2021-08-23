@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MovieController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,8 +15,6 @@ use App\Http\Controllers\MovieController;
 |
 */
 
-Route::apiResource("/movies", MovieController::class); ///la ruta se va a llamar movies
+Route::apiResource("/movie", MovieController::class); ///la ruta se va a llamar movies
 
-Route::get('/', function () {
-  return 'welcome';
-});
+Route::apiResource("/category", CategoryController::class);

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Movie;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
-class MovieController extends Controller
+class CategoryController extends Controller
 {
   /**
    * Display a listing of the resource.
@@ -14,9 +14,7 @@ class MovieController extends Controller
    */
   public function index()
   {
-    //
-    $movies = Movie::all();
-    return $movies;
+    return Category::all();
   }
 
   /**
@@ -26,7 +24,7 @@ class MovieController extends Controller
    */
   public function create()
   {
-    //devolver una vista que puede ser un formulario para crear un estudiante
+    //
   }
 
   /**
@@ -37,18 +35,17 @@ class MovieController extends Controller
    */
   public function store(Request $request)
   {
-    $movie = Movie::create($request->all());
-    $movie->categories()->attach($request->input('categories'));
-    return $movie;
+    $category = Category::create($request->all());
+    return $category;
   }
 
   /**
    * Display the specified resource.
    *
-   * @param  \App\Models\Movie  $movie
+   * @param  \App\Models\Category  $category
    * @return \Illuminate\Http\Response
    */
-  public function show(Movie $movie)
+  public function show(Category $category)
   {
     //
   }
@@ -56,10 +53,10 @@ class MovieController extends Controller
   /**
    * Show the form for editing the specified resource.
    *
-   * @param  \App\Models\Movie  $movie
+   * @param  \App\Models\Category  $category
    * @return \Illuminate\Http\Response
    */
-  public function edit(Movie $movie)
+  public function edit(Category $category)
   {
     //
   }
@@ -68,10 +65,10 @@ class MovieController extends Controller
    * Update the specified resource in storage.
    *
    * @param  \Illuminate\Http\Request  $request
-   * @param  \App\Models\Movie  $movie
+   * @param  \App\Models\Category  $category
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, Movie $movie)
+  public function update(Request $request, Category $category)
   {
     //
   }
@@ -79,10 +76,10 @@ class MovieController extends Controller
   /**
    * Remove the specified resource from storage.
    *
-   * @param  \App\Models\Movie  $movie
+   * @param  \App\Models\Category  $category
    * @return \Illuminate\Http\Response
    */
-  public function destroy(Movie $movie)
+  public function destroy(Category $category)
   {
     //
   }
