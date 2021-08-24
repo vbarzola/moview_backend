@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\PlatformController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,3 +19,5 @@ use App\Http\Controllers\MovieController;
 Route::apiResource("/movie", MovieController::class); ///la ruta se va a llamar movies
 
 Route::apiResource("/category", CategoryController::class);
+
+Route::apiResource("/platform", PlatformController::class);

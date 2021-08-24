@@ -18,16 +18,6 @@ class PlatformController extends Controller
   }
 
   /**
-   * Show the form for creating a new resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
-  public function create()
-  {
-    //
-  }
-
-  /**
    * Store a newly created resource in storage.
    *
    * @param  \Illuminate\Http\Request  $request
@@ -44,19 +34,9 @@ class PlatformController extends Controller
    * @param  \App\Models\Platform  $platform
    * @return \Illuminate\Http\Response
    */
-  public function show(Platform $platform)
+  public function show($id)
   {
-  }
-
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  \App\Models\Platform  $platform
-   * @return \Illuminate\Http\Response
-   */
-  public function edit(Platform $platform)
-  {
-    //
+    return Platform::findOrFail($id);
   }
 
   /**
@@ -66,19 +46,19 @@ class PlatformController extends Controller
    * @param  \App\Models\Platform  $platform
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, Platform $platform)
+  public function update(Request $request, $id)
   {
-    //
+    return Platform::findOrFail($id)->update($request->all());
   }
 
   /**
    * Remove the specified resource from storage.
    *
-   * @param  \App\Models\Platform  $platform
+   * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function destroy(Platform $platform)
+  public function destroy($id)
   {
-    //
+    return Platform::destroy($id);
   }
 }
