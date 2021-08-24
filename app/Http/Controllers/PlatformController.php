@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Models\Platform;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class PlatformController extends Controller
 {
   /**
    * Display a listing of the resource.
@@ -14,7 +14,7 @@ class CategoryController extends Controller
    */
   public function index()
   {
-    return Category::all();
+    return Platform::all();
   }
 
   /**
@@ -35,27 +35,26 @@ class CategoryController extends Controller
    */
   public function store(Request $request)
   {
-    return Category::create($request->all());
+    return Platform::create($request->all());
   }
 
   /**
    * Display the specified resource.
    *
-   * @param  \App\Models\Category  $category
+   * @param  \App\Models\Platform  $platform
    * @return \Illuminate\Http\Response
    */
-  public function show($id)
+  public function show(Platform $platform)
   {
-    return Category::find($id);
   }
 
   /**
    * Show the form for editing the specified resource.
    *
-   * @param  \App\Models\Category  $category
+   * @param  \App\Models\Platform  $platform
    * @return \Illuminate\Http\Response
    */
-  public function edit(Category $category)
+  public function edit(Platform $platform)
   {
     //
   }
@@ -64,22 +63,22 @@ class CategoryController extends Controller
    * Update the specified resource in storage.
    *
    * @param  \Illuminate\Http\Request  $request
-   * @param  \App\Models\Category  $category
+   * @param  \App\Models\Platform  $platform
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, $id)
+  public function update(Request $request, Platform $platform)
   {
-    return Category::find($id)->update($request->all());
+    //
   }
 
   /**
    * Remove the specified resource from storage.
    *
-   * @param  \App\Models\Category  $category
+   * @param  \App\Models\Platform  $platform
    * @return \Illuminate\Http\Response
    */
-  public function destroy($id)
+  public function destroy(Platform $platform)
   {
-    return Category::destroy($id);
+    //
   }
 }
