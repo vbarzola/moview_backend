@@ -45,9 +45,9 @@ class ReviewController extends Controller
      * @param  \App\Models\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function show(Review $review)
+    public function show($id_movie)
     {
-        //
+        return Review::where('id_movie', $id_movie)->get();
     }
 
     /**

@@ -5,8 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
-use App\Models\Watchlist;
 use App\Http\Controllers\PlatformController;
+use App\Http\Controllers\WatchlistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +25,7 @@ Route::apiResource("/category", CategoryController::class);
 
 Route::apiResource("/review", ReviewController::class);
 
-Route::apiResource("/watchlist", Watchlist::class);
+Route::apiResource("/watchlist", WatchlistController::class);
 
 Route::apiResource("/user", UserController::class);
 Route::apiResource("/platform", PlatformController::class);

@@ -45,9 +45,9 @@ class WatchlistController extends Controller
      * @param  \App\Models\Watchlist  $watchlist
      * @return \Illuminate\Http\Response
      */
-    public function show(int $id_user)
+    public function show($id_user)
     {
-        return Watchlist::where('id_user', $id_user)->value('id_movie');
+        return Watchlist::where('id_user', $id_user)->pluck('id_movie');
     }
 
     /**
