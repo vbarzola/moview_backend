@@ -71,9 +71,9 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, int $id)
     {
-        //
+        return User::find($id)->update($request->all());
     }
 
     /**
@@ -82,8 +82,9 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(int $id)
+
     {
-        //
+        return User::destroy($id);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\FollowingUser;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class FollowingUserController extends Controller
@@ -79,8 +80,11 @@ class FollowingUserController extends Controller
      * @param  \App\Models\FollowingUser  $followingUser
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FollowingUser $followingUser)
+    public function destroy($id_user, $id_follows_user)
     {
-        //
+        return User::where(
+            ['user', '=', $id_user],
+            ['follows_user', '=', $id_follows_user],
+        )->delete();
     }
 }

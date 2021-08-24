@@ -79,8 +79,11 @@ class ReviewController extends Controller
      * @param  \App\Models\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Review $review)
+    public function destroy(int $id_user, int $id_movie)
     {
-        //
+        return Review::where(
+            ['id_user', '=', $id_user],
+            ['id_movie', '=', $id_movie],
+        )->delete();
     }
 }
