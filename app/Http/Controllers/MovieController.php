@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 
@@ -14,19 +15,8 @@ class MovieController extends Controller
    */
   public function index()
   {
-    //
     $movies = Movie::all();
     return $movies;
-  }
-
-  /**
-   * Show the form for creating a new resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
-  public function create()
-  {
-    //devolver una vista que puede ser un formulario para crear un estudiante
   }
 
   /**
@@ -39,6 +29,7 @@ class MovieController extends Controller
   {
     $movie = Movie::create($request->all());
     $movie->categories()->attach($request->input('categories'));
+    $movie->platforms()->attach($request->input('platforms'));
     return $movie;
   }
 
@@ -48,9 +39,13 @@ class MovieController extends Controller
    * @param  \App\Models\Movie  $movie
    * @return \Illuminate\Http\Response
    */
-  public function show(Movie $movie)
+  public function show($id)
   {
-    //
+    $movie = Movie::with(['categories', 'platforms'])->findOrFail($id);
+    $name_categories = $movie->categories->pluck('name', 'id', 'icon');
+    $movie = $movie->toArray();
+    $movie['categories'] =  $name_categories;
+    return $movie;
   }
 
   /**
@@ -82,8 +77,8 @@ class MovieController extends Controller
    * @param  \App\Models\Movie  $movie
    * @return \Illuminate\Http\Response
    */
-  public function destroy(Movie $movie)
+  public function destroy($id)
   {
-    //
+    return Movie::destroy($id);
   }
 }
