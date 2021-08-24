@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Review extends Model
 {
     use HasFactory;
-    protected $fillable = ["username", "name", "password", "image"];
+    protected $fillable = ["id_user", "id_movie", "comment", "score", "date"];
 }
