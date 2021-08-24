@@ -6,6 +6,7 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
 use App\Models\Watchlist;
+use App\Http\Controllers\PlatformController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +28,4 @@ Route::apiResource("/review", ReviewController::class);
 Route::apiResource("/watchlist", Watchlist::class);
 
 Route::apiResource("/user", UserController::class);
+Route::apiResource("/platform", PlatformController::class);
