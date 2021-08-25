@@ -10,7 +10,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Movie extends Model
 {
   use HasFactory;
-  protected $fillable = ["name", "producer", "avg_score", "year", "sinopsis", "image_cover", "image_banner"];
+  protected $fillable = ["name", "producer", "type", "duration", "avg_score", "year", "sinopsis", "image_cover", "image_banner"];
+  protected $hidden = ['pivot'];
 
   public function categories()
   {
@@ -19,6 +20,6 @@ class Movie extends Model
 
   public function platforms()
   {
-    return $this->belongsToMany(Platform::class, 'movie_in_platforms', 'id_movie', 'id_platform');
+    return $this->belongsToMany(Platform::class, 'movie_in_platforms', 'id_movie', 'id_platform')->withPivot('link');
   }
 }
