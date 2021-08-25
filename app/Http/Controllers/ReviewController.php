@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Review;
 use Illuminate\Http\Request;
+use App\Models\Movie;
+use App\Models\User;
+use App\Models\FollowingUser;
 
 class ReviewController extends Controller
 {
@@ -39,16 +42,58 @@ class ReviewController extends Controller
         return $review;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Review  $review
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id_movie)
+    public function getReviewstOfUser($id_user)
     {
-        return Review::where('id_movie', $id_movie)->get();
+        $result = collect(Review::join('movies', 'reviews.id_movie', '=', 'movies.id')
+            ->join('users', 'reviews.id_user', 'users.id')
+            ->select(
+                'users.name as name_user',
+                'users.image as image_user',
+                'movies.id as id_movie',
+                'movies.name as name_movie',
+                'reviews.score',
+                'reviews.date',
+                'reviews.comment'
+            )
+            ->where('id_user', $id_user)
+            ->get());
+        return $result;
     }
+
+    public function getReviewsofFollowing($id_user)
+    {
+        $user = User::find($id_user);
+
+        return $user->following()->select('id', 'username', 'name')
+            ->join('reviews', 'reviews.id_user', '=', 'id')
+            ->join('movies', 'movies.id', '=', 'reviews.id_movie')
+            ->select(
+                'users.id as id_user',
+                'users.name as name_user',
+                'movies.id as id_movie',
+                'movies.name as name_movie',
+                'reviews.score',
+                'reviews.date',
+                'reviews.comment'
+            )
+            ->get();
+    }
+
+    public function getReviewsOfMovie($id_movie)
+    {
+        return Review::join('movies', 'movies.id', '=', 'reviews.id_movie')
+            ->join('users', 'reviews.id_user', 'users.id')
+            ->where('movies.id', $id_movie)
+            ->select(
+                'users.name as name_user',
+                'users.image as image_user',
+                'reviews.score',
+                'reviews.date',
+                'reviews.comment'
+            )->get();;
+    }
+
+
 
     /**
      * Show the form for editing the specified resource.

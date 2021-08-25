@@ -9,4 +9,9 @@ class User extends Model
 {
     use HasFactory;
     protected $fillable = ["username", "name", "password", "image"];
+
+    public function following()
+    {
+        return $this->belongsToMany(User::class, 'following_users', 'user', 'follows_user');
+    }
 }

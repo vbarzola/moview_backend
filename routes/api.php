@@ -20,12 +20,12 @@ use App\Http\Controllers\WatchlistController;
 */
 
 Route::apiResource("/movie", MovieController::class); ///la ruta se va a llamar movies
-
 Route::apiResource("/category", CategoryController::class);
-
 Route::apiResource("/review", ReviewController::class);
-
 Route::apiResource("/watchlist", WatchlistController::class);
-
 Route::apiResource("/user", UserController::class);
 Route::apiResource("/platform", PlatformController::class);
+Route::get('/watchlist/user/{user_id}', [WatchlistController::class, 'getWatchlistOfUser']);
+Route::get('/review/user/{user_id}', [ReviewController::class, 'getReviewstOfUser']);
+Route::get('/review/following/{user_id}', [ReviewController::class, 'getReviewsofFollowing']);
+Route::get('/review/movie/{movie_id}', [ReviewController::class, 'getReviewsOfMovie']);

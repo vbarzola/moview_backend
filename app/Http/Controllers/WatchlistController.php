@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Movie;
 use App\Models\Watchlist;
 use Illuminate\Http\Request;
+
 
 class WatchlistController extends Controller
 {
@@ -39,15 +42,16 @@ class WatchlistController extends Controller
         return $watchlist;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Watchlist  $watchlist
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id_user)
+    public function getWatchlistOfUser($id_user)
     {
-        return Watchlist::where('id_user', $id_user)->pluck('id_movie');
+
+
+
+        $result = collect(Watchlist::join('movies', 'watchlists.id_movie', '=', 'movies.id')
+            ->where('watchlists.id_user', $id_user)
+            ->select('movies.id', 'movies.image_cover')
+            ->get());
+        return $result;
     }
 
     /**

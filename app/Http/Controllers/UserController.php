@@ -50,7 +50,10 @@ class UserController extends Controller
      */
     public function show(int $id)
     {
-        return User::find($id);
+        $user = User::find($id);
+        return collect($user->toArray())
+            ->only(['username', 'name', 'image'])
+            ->all();
     }
 
     /**
@@ -87,4 +90,12 @@ class UserController extends Controller
     {
         return User::destroy($id);
     }
+
+    /**public function profile()
+    {
+        $user = User::find(1);
+        return collect($user->toArray())
+            ->only(['username', 'name', 'image'])
+            ->all();
+    }**/
 }
