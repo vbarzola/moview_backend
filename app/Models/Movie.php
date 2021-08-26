@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Movie extends Model
 {
   use HasFactory;
-  protected $fillable = ["name", "producer", "type", "duration", "avg_score", "year", "sinopsis", "image_cover", "image_banner"];
+  protected $fillable = ["name", "producer", "type", "duration", "avg_score", "year", "sinopsis", "image_cover", "image_banner", "rating_numbers"];
   protected $hidden = ['pivot'];
 
   public function categories()
