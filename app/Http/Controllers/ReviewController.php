@@ -70,6 +70,7 @@ class ReviewController extends Controller
             ->select(
                 'users.id as id_user',
                 'users.name as name_user',
+                'users.image as image_user',
                 'movies.id as id_movie',
                 'movies.name as name_movie',
                 'reviews.score',
