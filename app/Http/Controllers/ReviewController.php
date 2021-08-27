@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\User;
+use App\Models\Movie;
 use App\Models\Review;
 use Illuminate\Http\Request;
-use App\Models\Movie;
-use App\Models\User;
 use App\Models\FollowingUser;
 
 class ReviewController extends Controller
@@ -38,7 +39,18 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        $review = Review::create($request->all());
+        $today = Carbon::now();
+        $data = $request->all();
+        $score = $data['score'];
+        $data["date"] = $today->format("d/m/Y");
+        $movie = Movie::findOrFail($data["id_movie"]);
+        $review = Review::create($data);
+        $rating_numbers = $movie->rating_numbers;
+        $avg_score = $movie->avg_score;
+        $new_avg = ($rating_numbers * $avg_score + $score) / ($rating_numbers + 1);
+        $movie->avg_score = $new_avg;
+        $movie->rating_numbers = $rating_numbers + 1;
+        $movie->save();
         return $review;
     }
 
