@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\PeliculaController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PlatformController;
@@ -25,6 +26,7 @@ Route::apiResource("/review", ReviewController::class);
 Route::apiResource("/watchlist", WatchlistController::class);
 Route::apiResource("/user", UserController::class);
 Route::apiResource("/platform", PlatformController::class);
+Route::apiResource("/pelicula", PeliculaController::class);
 Route::get('/watchlist/user/{user_id}', [WatchlistController::class, 'getWatchlistOfUser']);
 Route::get('/review/user/{user_id}', [ReviewController::class, 'getReviewstOfUser']);
 Route::get('/review/following/{user_id}', [ReviewController::class, 'getReviewsofFollowing']);
