@@ -42,11 +42,9 @@ class WatchlistController extends Controller
         return $watchlist;
     }
 
-    public function getWatchlistOfUser($id_user)
+    public function getWatchlistOfUser()
     {
-
-
-
+        $id_user = auth()->user()->id;
         $result = collect(Watchlist::join('movies', 'watchlists.id_movie', '=', 'movies.id')
             ->where('watchlists.id_user', $id_user)
             ->select('movies.id', 'movies.image_cover')

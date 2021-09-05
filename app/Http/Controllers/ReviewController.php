@@ -72,10 +72,9 @@ class ReviewController extends Controller
         return $result;
     }
 
-    public function getReviewsofFollowing($id_user)
+    public function getReviewsofFollowing()
     {
-        $user = User::find($id_user);
-
+        $user = (object) auth()->user();
         return $user->following()->select('id', 'username', 'name')
             ->join('reviews', 'reviews.id_user', '=', 'id')
             ->join('movies', 'movies.id', '=', 'reviews.id_movie')
