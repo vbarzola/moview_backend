@@ -36,9 +36,13 @@ class WatchlistController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($id_movie)
     {
-        $watchlist = Watchlist::create($request->all());
+        $id_user = auth()->user()->id;
+        $watchlist = Watchlist::create([
+            'id_user' => $id_user,
+            'id_movie' => $id_movie,
+        ]);
         return $watchlist;
     }
 
@@ -81,11 +85,8 @@ class WatchlistController extends Controller
      * @param  \App\Models\Watchlist  $watchlist
      * @return \Illuminate\Http\Response
      */
-    public function destroy(int $id_user, int $id_movie)
-    {
-        return Watchlist::where(
-            ['id_user', '=', $id_user],
-            ['id_movie', '=', $id_movie],
-        )->delete();
+    public function destroy($id_movie){
+        $id_user = auth()->user()->id;
+        return Watchlist::where('id_user', $id_user)->where('id_movie', $id_movie)->delete();
     }
 }

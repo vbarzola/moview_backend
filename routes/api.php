@@ -36,6 +36,8 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
   Route::get('/review/following', [ReviewController::class, 'getReviewsofFollowing']);
   Route::post('/review', [ReviewController::class, 'store']);
   Route::get('/watchlist/user', [WatchlistController::class, 'getWatchlistOfUser']);
+  Route::post('/watchlist/{id_movie}', [WatchlistController::class, 'store']);
+  Route::delete('/watchlist/{id_movie}', [WatchlistController::class, 'destroy']);
   Route::post('/user/follow/{follows_user}', [UserController::class, 'followUser']);
   Route::post('/user/unfollow/{follows_user}', [UserController::class, 'unfollowUser']);
   Route::post('/logout', [AuthController::class, 'logout']);
