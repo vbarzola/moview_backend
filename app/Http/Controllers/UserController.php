@@ -85,10 +85,24 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(int $id)
-
-    {
+    public function destroy(int $id){
         return User::destroy($id);
+    }
+
+    public function followUser($follows_user){
+        $user = (object) auth()->user();
+        $user->following()->attach($follows_user);
+        return [
+          "message" => "Ha empezado a seguir a este usuario."
+        ];
+    }
+
+    public function unfollowUser($follows_user){
+        $user = (object) auth()->user();
+        $user->following()->detach($follows_user);
+        return [
+          "message" => "Ha dejado de seguir a este usuario."
+        ];
     }
 
     /**public function profile()

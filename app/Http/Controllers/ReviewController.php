@@ -22,16 +22,6 @@ class ReviewController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -39,12 +29,19 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
+        $id_user = auth()->user()->id;
         $today = Carbon::now();
         $data = $request->all();
         $score = $data['score'];
         $data["date"] = $today->format("d/m/Y");
         $movie = Movie::findOrFail($data["id_movie"]);
-        $review = Review::create($data);
+        $review = Review::create([
+            "id_user" => $id_user,
+            "id_movie" => $data["id_movie"],
+            "score" => $score,
+            "date" => $data["date"],
+            "comment" => $data["comment"]
+        ]);
         $rating_numbers = $movie->rating_numbers;
         $avg_score = $movie->avg_score;
         $new_avg = ($rating_numbers * $avg_score + $score) / ($rating_numbers + 1);
