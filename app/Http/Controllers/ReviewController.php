@@ -56,6 +56,7 @@ class ReviewController extends Controller
     $result = collect(Review::join('movies', 'reviews.id_movie', '=', 'movies.id')
       ->join('users', 'reviews.id_user', 'users.id')
       ->select(
+        'users.id as id_user',
         'users.name as name_user',
         'users.image as image_user',
         'movies.id as id_movie',
