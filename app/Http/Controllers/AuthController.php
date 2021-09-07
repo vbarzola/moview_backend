@@ -16,7 +16,7 @@ class AuthController extends Controller
       'username' => 'required|string',
       'password' => 'required|string',
       'image' => 'string',
-      'id_device' => 'string'
+      'id_device' => 'nullable|string'
     ]);
 
     $user = User::create([
@@ -24,7 +24,7 @@ class AuthController extends Controller
       'username' => strtolower($fields['username']),
       'password' => bcrypt($fields['password']),
       'image' => $fields['image'] ?? 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png',
-      'id_device' =>  $fields['id_device'],
+      'id_device' =>  $fields['id_device'] ?? null,
     ]);
 
     $token = $user->createToken('moviewToken')->plainTextToken;
@@ -40,7 +40,7 @@ class AuthController extends Controller
     $fields = $request->validate([
       'username' => 'required|string',
       'password' => 'required|string',
-      'id_device' => 'string'
+      'id_device' => 'nullable|string'
     ]);
 
     $user = User::where('username', strtolower($fields['username']))->first();
@@ -63,9 +63,12 @@ class AuthController extends Controller
 
   public function logout(Request $request)
   {
-    auth()->user()->tokens->each(function ($token, $key) {
+    $user = (object) auth()->user();
+    $user->tokens->each(function ($token, $key) {
       $token->delete();
     });
+    $user->id_device = null;
+    $user->save();
     return [
       'message' => 'Sesión cerrada exitosamente'
     ];
