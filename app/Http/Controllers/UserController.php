@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Kutia\Larafirebase\Facades\Larafirebase;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -113,13 +114,17 @@ class UserController extends Controller
     return [
       "message" => "Ha dejado de seguir a este usuario."
     ];
+    $device_id = '';
+    $this->sendNotification($device_id);
   }
 
-  /**public function profile()
-    {
-        $user = User::find(1);
-        return collect($user->toArray())
-            ->only(['username', 'name', 'image'])
-            ->all();
-    }**/
+  public function sendNotification($idDevice)
+  {
+    return Larafirebase::withTitle('Test Title')
+      ->withBody('Test body')
+      ->withImage('https://firebase.google.com/images/social.png')
+      ->withClickAction('admin/notifications')
+      ->withPriority('high')
+      ->sendNotification($this->$idDevice);
+  }
 }
