@@ -39,7 +39,7 @@ class AuthController extends Controller
     $fields = $request->validate([
       'username' => 'required|string',
       'password' => 'required|string',
-      'id_device' => 'required|string'
+      'id_device' => 'string'
     ]);
 
     $user = User::where('username', strtolower($fields['username']))->first();
@@ -50,7 +50,7 @@ class AuthController extends Controller
     if (!Hash::check($fields['password'], $user->password)) {
       return response(['message' => 'Contraseña incorrecta'], 401);
     }
-    $user->id_device = $fields['id_device'];
+    $user->id_device = $fields['id_device'] ?? null;
     $user->save();
     $token = $user->createToken('moviewToken')->plainTextToken;
     $response = [
