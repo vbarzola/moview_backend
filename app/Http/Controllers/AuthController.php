@@ -38,7 +38,8 @@ class AuthController extends Controller
   {
     $fields = $request->validate([
       'username' => 'required|string',
-      'password' => 'required|string'
+      'password' => 'required|string',
+      'id_device' => 'required|string'
     ]);
 
     $user = User::where('username', strtolower($fields['username']))->first();
