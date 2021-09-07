@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Kutia\Larafirebase\Facades\Larafirebase;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
-use App\Http\Controllers\NotificationController;
 
 class UserController extends Controller
 {
@@ -106,6 +106,15 @@ class UserController extends Controller
     NotificationController::sendNotificationNewFollower($user, $device_id);
     return [
       "message" => "Ha empezado a seguir a este usuario."
+    ];
+  }
+
+  public function unfollowUser($follows_user)
+  {
+    $user = (object) auth()->user();
+    $user->following()->detach($follows_user);
+    return [
+      "message" => "Ha dejado de seguir a este usuario."
     ];
   }
 }
