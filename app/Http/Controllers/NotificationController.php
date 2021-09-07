@@ -10,8 +10,8 @@ class NotificationController extends Controller
 {
     public static function sendNotificationNewFollower($user, $idDevice)
     {
-        return Larafirebase::withTitle('Test Title')
-            ->withBody('Nuevo seguidor')
+        return Larafirebase::withTitle('Nuevo seguidor')
+            ->withBody("$user->name ha comenzado a seguirte!")
             ->withImage($user->image)
             ->withClickAction('admin/notifications')
             ->withPriority('high')
