@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Kutia\Larafirebase\Facades\Larafirebase;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use App\Http\Controllers\NotificationController;
 
 class UserController extends Controller
 {
@@ -102,29 +102,10 @@ class UserController extends Controller
   {
     $user = (object) auth()->user();
     $user->following()->attach($follows_user);
+    $device_id = User::find($follows_user)->id_device;
+    NotificationController::sendNotificationNewFollower($user, $device_id);
     return [
       "message" => "Ha empezado a seguir a este usuario."
     ];
-  }
-
-  public function unfollowUser($follows_user)
-  {
-    $user = (object) auth()->user();
-    $user->following()->detach($follows_user);
-    return [
-      "message" => "Ha dejado de seguir a este usuario."
-    ];
-    $device_id = '';
-    $this->sendNotification($device_id);
-  }
-
-  public function sendNotification($idDevice)
-  {
-    return Larafirebase::withTitle('Test Title')
-      ->withBody('Test body')
-      ->withImage('https://firebase.google.com/images/social.png')
-      ->withClickAction('admin/notifications')
-      ->withPriority('high')
-      ->sendNotification($this->$idDevice);
   }
 }
