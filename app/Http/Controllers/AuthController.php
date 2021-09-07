@@ -15,7 +15,8 @@ class AuthController extends Controller
       'name' => 'required|string',
       'username' => 'required|string',
       'password' => 'required|string',
-      'image' => 'string'
+      'image' => 'string',
+      'id_device' => 'string'
     ]);
 
     $user = User::create([
