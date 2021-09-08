@@ -16,7 +16,7 @@ class MovieController extends Controller
    */
   public function index()
   {
-    $movies = Movie::select('id', 'name', 'type', 'year', 'duration', 'image_cover', 'producer', 'avg_score')->with(['categories:id'])->get();
+    $movies = Movie::select('id', 'name', 'type', 'year', 'duration', 'image_cover', 'producer', 'avg_score', 'rating_numbers')->with(['categories:id'])->get();
     $movies_to_return = [];
     foreach ($movies as $movie) {
       $id_categories = $movie->categories->pluck('id');
