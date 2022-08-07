@@ -1,0 +1,12 @@
+version: '3.8'
+services: 
+  main:
+    build: .
+    container_name: MoviewBackend
+    command: 'php artisan serve --host=0.0.0.0'
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    ports:
+      - 8000:8000
