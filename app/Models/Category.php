@@ -9,7 +9,7 @@ class Category extends Model
 {
   use HasFactory;
   protected $fillable = ["name", "icon"];
-  protected $hidden = ['pivot'];
+  protected $hidden = [];
 
   public function movies()
   {
